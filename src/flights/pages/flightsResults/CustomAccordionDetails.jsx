@@ -14,7 +14,7 @@ import AirlineSeatLegroomReducedOutlinedIcon from "@mui/icons-material/AirlineSe
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 import flightSearchStore from "../../../store/flightSearchStore";
 import moment from "moment";
-import FlightWhitoutSegments from "./flightWhitoutSegments";
+import FlightWhitoutSegments from "./FlightWhitoutSegments";
 
 const CustomAccordionDetails = ({ flight }) => {
   const searchParameters = flightSearchStore((state) => state.searchParameters);
