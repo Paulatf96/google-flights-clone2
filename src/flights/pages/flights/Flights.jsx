@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, Container, Grid2, Typography, Tooltip } from "@mui/material";
+import {
+  Button,
+  Container,
+  Grid2,
+  Typography,
+  Tooltip,
+  Box,
+} from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 import image from "../../assets/flights.svg";
@@ -13,6 +20,7 @@ const Flights = () => {
       borderRadius: 50,
       border: "1px solid lightgray",
       textTransform: "capitalize",
+      width: { xs: "20%", md: "10%" },
     };
 
     return (
@@ -45,7 +53,11 @@ const Flights = () => {
           <Typography
             variant="h2"
             textAlign={"center"}
-            sx={{ paddingBottom: 3, fontWeight: 400, fontSize: 56 }}
+            sx={{
+              paddingBottom: 3,
+              fontWeight: 400,
+              fontSize: { xs: 40, md: 56 },
+            }}
           >
             Flights
           </Typography>
@@ -53,7 +65,7 @@ const Flights = () => {
         <Grid2 size={12}>
           <SearchFlights />
         </Grid2>
-        <Grid2 size={12} paddingX={11}>
+        <Grid2 size={12} sx={{ paddingX: { xs: 0, md: 11 } }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Typography
               variant="h6"
@@ -84,7 +96,13 @@ const Flights = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
-            <div style={{ position: "absolute", top: "50%", left: "45%" }}>
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: { xs: "25%", md: "45%" },
+              }}
+            >
               <Button
                 variant="text"
                 sx={{
@@ -95,7 +113,7 @@ const Flights = () => {
               >
                 Explore destinations
               </Button>
-            </div>
+            </Box>
           </Grid2>
           <Grid2 container spacing={5} paddingTop={2} size={12}>
             <SuggestionsCards />

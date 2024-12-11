@@ -2,7 +2,7 @@ import React from "react";
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router";
 
@@ -45,8 +45,12 @@ const SearchFlights = () => {
 
   const getIds = async () => {
     updateFlightList([]);
-    const originAirportsIds = await httpSearchAirport.getIds("pereira");
-    const destinationAirportsIds = await httpSearchAirport.getIds("paris");
+    const originAirportsIds = await httpSearchAirport.getIds(
+      searchParameters.originCity
+    );
+    const destinationAirportsIds = await httpSearchAirport.getIds(
+      searchParameters.destinationCity
+    );
     const originSkyId = originAirportsIds?.data[0]?.skyId;
     const destinationSkyId = destinationAirportsIds?.data[0]?.skyId;
     const originEntityId = originAirportsIds?.data[0]?.entityId;
@@ -76,7 +80,6 @@ const SearchFlights = () => {
       destinationSkyId,
       destinationEntityId
     );
-    console.log(flights);
     updateFlightList(flights);
   };
 
@@ -93,13 +96,16 @@ const SearchFlights = () => {
       }}
     >
       <FormControl sx={{ width: "100%" }}>
-        <Grid container spacing={2} gap={3}>
-          <SelectTypeTrip />
-          <Grid item xs={12} md={2}>
+        <Grid container spacing={2} gap={2}>
+          <Grid item xs={4} md={2}>
+            <SelectTypeTrip />
+          </Grid>
+          <Grid item xs={4} md={2}>
             <NumberOfPerson />
           </Grid>
-
-          <SelectCabinClass />
+          <Grid item xs={12} md={2}>
+            <SelectCabinClass />
+          </Grid>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <CityFromTo />
@@ -110,7 +116,13 @@ const SearchFlights = () => {
           </Grid>
         </Grid>
       </FormControl>
-      <div style={{ position: "absolute", bottom: -20, left: "45%" }}>
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: -20,
+          left: { xs: "33%", md: "45%" },
+        }}
+      >
         <Button
           variant="contained"
           sx={{ borderRadius: 50, textTransform: "capitalize" }}
@@ -118,7 +130,7 @@ const SearchFlights = () => {
         >
           <SearchIcon /> <Typography>Search</Typography>
         </Button>
-      </div>
+      </Box>
     </Paper>
   );
 };

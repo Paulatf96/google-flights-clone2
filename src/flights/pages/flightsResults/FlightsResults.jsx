@@ -27,17 +27,16 @@ const FlightsResults = () => {
   const [itineraries, setItineraries] = useState([]);
   const [numberOfItineraries, setNumberOfItineraries] = useState(5);
   const flightList = flightListStore((state) => state.flightList);
-  console.log("flightList en la store:", flightList);
+
   useEffect(() => {
     if (flightList?.itineraries?.length > 0) {
       setItineraries(flightList.itineraries);
     }
-    console.log("flightList actualizado:", flightList);
   }, [flightList]);
 
   return (
     <>
-      {flightList?.itineraries?.length == 0 && (
+      {!flightList?.itineraries?.length && (
         <Box sx={{ width: "100%" }}>
           <LinearProgress />
         </Box>
@@ -72,17 +71,19 @@ const FlightsResults = () => {
                 alignItems="center"
                 justify="center"
               >
-                <SelectTypeTrip />
-                <Grid item xs={12} md={2}>
+                <Grid item xs={4} md={2}>
+                  <SelectTypeTrip />
+                </Grid>
+                <Grid item xs={4} md={2}>
                   <NumberOfPerson />
                 </Grid>
 
                 <SelectCabinClass />
-                <Grid container spacing={13}>
+                <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <CityFromTo />
                   </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid item xs={12} md={6} sx={{ pl: { xs: 2, md: 14 } }}>
                     <DateFromTo />
                   </Grid>
                 </Grid>
@@ -96,19 +97,29 @@ const FlightsResults = () => {
           >
             <Box sx={{ mb: 2 }}>
               <Stack
-                direction="row"
+                direction={{ xs: "column", md: "row" }}
                 justifyContent="space-between"
                 alignItems="center"
+                spacing={1}
               >
                 <Typography variant="h5" component="h1">
                   Top departing flights
                 </Typography>
-                <Stack direction="row" alignItems="center" spacing={1}>
+                <Stack
+                  alignItems="center"
+                  spacing={1}
+                  sx={{ display: { xs: "none", md: "block" } }}
+                >
                   <Typography color="primary">Sorted by top flights</Typography>
                 </Stack>
               </Stack>
 
-              <Stack direction="row" alignItems="center" spacing={1}>
+              <Stack
+                direction="row"
+                alignItems="center"
+                spacing={1}
+                sx={{ mb: { xs: 2, md: 1 } }}
+              >
                 <Typography variant="body2" color="text.secondary">
                   Ranked based on price and convenience
                 </Typography>

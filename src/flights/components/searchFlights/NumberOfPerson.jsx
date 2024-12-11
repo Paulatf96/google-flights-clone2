@@ -6,7 +6,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
 
 import flightSearchStore from "../../../store/flightSearchStore";
 
@@ -95,31 +95,37 @@ const NumberOfPerson = () => {
   };
 
   return (
-    <FormControl>
-      <Box
-        sx={{
-          position: "absolute",
-          left: 16,
-          top: "50%",
-          transform: "translateY(-50%)",
-          display: "flex",
-          alignItems: "center",
-          pointerEvents: "none",
-        }}
-      >
-        <PersonOutlineIcon
-          color="action"
-          fontSize="small"
-          sx={{ paddingRight: 1 }}
-        />
-        <span>{totalPersons}</span>
-      </Box>
-      <Select style={{ minWidth: 120 }} variant="standard">
-        {typesOfPerson.map((type, index) => (
-          <CustomMenuItem key={type.value + index} type={type} index={index} />
-        ))}
-      </Select>
-    </FormControl>
+    <Grid item xs={6} md={2}>
+      <FormControl fullWidth>
+        <Box
+          sx={{
+            position: "absolute",
+            left: 16,
+            top: "50%",
+            transform: "translateY(-50%)",
+            display: "flex",
+            alignItems: "center",
+            pointerEvents: "none",
+          }}
+        >
+          <PersonOutlineIcon
+            color="action"
+            fontSize="small"
+            sx={{ paddingRight: 1 }}
+          />
+          <span>{totalPersons}</span>
+        </Box>
+        <Select style={{ minWidth: 120 }} variant="standard">
+          {typesOfPerson.map((type, index) => (
+            <CustomMenuItem
+              key={type.value + index}
+              type={type}
+              index={index}
+            />
+          ))}
+        </Select>
+      </FormControl>
+    </Grid>
   );
 };
 

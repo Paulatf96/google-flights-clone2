@@ -19,9 +19,9 @@ import FlightWhitoutSegments from "./flightWhitoutSegments";
 const CustomAccordionDetails = ({ flight }) => {
   const searchParameters = flightSearchStore((state) => state.searchParameters);
   const travelClass = searchParameters.travelClass;
-  const getLayover = () => {
-    const start = moment(flight.legs[0].segments[0].arrival);
-    const end = moment(flight.legs[0].segments[1].departure);
+  const getLayover = (index) => {
+    const start = moment(flight.legs[0].segments[index].arrival);
+    const end = moment(flight.legs[0].segments[index + 1].departure);
 
     const duration = moment.duration(end.diff(start));
     const hours = Math.floor(duration.asHours());
@@ -45,23 +45,21 @@ const CustomAccordionDetails = ({ flight }) => {
                   spacing={2}
                   sx={{
                     pl: 2,
-                    borderLeft: "3px dotted",
-                    borderColor: "divider",
                   }}
                 >
-                  <Stack direction="row" spacing={2}>
+                  <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                     <Box
                       sx={{
                         pl: 7,
-                        borderLeft: "2px dotted",
+                        borderLeft: "3px dotted",
                         borderColor: "divider",
                       }}
                     />
                     <Stack spacing={1} flex={1}>
                       <Stack direction="row" spacing={1} alignItems="center">
                         <Typography>
-                          {segment.departure} · {segment.origin.name} (
-                          {segment.origin.displayCode})
+                          {moment(segment.departure).format("hh:mm A")} ·{" "}
+                          {segment.origin.name} ({segment.origin.displayCode})
                         </Typography>
                       </Stack>
                       <Typography color="text.secondary" variant="caption">
@@ -69,7 +67,8 @@ const CustomAccordionDetails = ({ flight }) => {
                       </Typography>
                       <Stack direction="row" spacing={1} alignItems="center">
                         <Typography>
-                          {segment.arrival} · {segment.destination.name} (
+                          {moment(segment.arrival).format("hh:mm A")} ·{" "}
+                          {segment.destination.name} (
                           {segment.destination.displayCode})
                         </Typography>
                       </Stack>
@@ -126,7 +125,7 @@ const CustomAccordionDetails = ({ flight }) => {
                 {segmentIndex < flight.legs[0].segments.length - 1 && (
                   <Stack
                     sx={{
-                      pl: 12,
+                      pl: { xs: 2.5, md: 12 },
                       height: 40,
                       pt: 2,
                       pb: 2,
@@ -139,7 +138,8 @@ const CustomAccordionDetails = ({ flight }) => {
                       height={40}
                       sx={{ pt: 2, pb: 2 }}
                     >
-                      {getLayover()} layover · {segment.destination.name} (
+                      {getLayover(segmentIndex)} layover ·{" "}
+                      {segment.destination.name} (
                       {segment.destination.displayCode})
                     </Typography>
                     <Divider variant="middle" />

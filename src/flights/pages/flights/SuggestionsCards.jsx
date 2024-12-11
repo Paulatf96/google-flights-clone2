@@ -41,7 +41,7 @@ const SuggestionsCards = () => {
   ];
 
   return (
-    <Grid2 container spacing={5} width="100%">
+    <Grid2 container spacing={5} width="100%" sx={{ justifyContent: "center" }}>
       {suggestions.map((suggestion, index) => (
         <Grid2 xs={4} md={1} key={index}>
           <CardMedia

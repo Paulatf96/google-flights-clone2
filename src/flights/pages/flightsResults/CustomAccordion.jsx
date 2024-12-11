@@ -17,7 +17,7 @@ const CustomAccordion = ({ flight, index }) => {
   const searchParameters = flightSearchStore((state) => state.searchParameters);
   const getAirlines = () => {
     const airLinesList = flight.legs.map((legs) => {
-      return legs.carriers.marketing[0].name;
+      return legs.carriers.marketing[0].name + " ";
     });
     return airLinesList;
   };
@@ -46,7 +46,7 @@ const CustomAccordion = ({ flight, index }) => {
     <Accordion key={index}>
       <AccordionSummary expandIcon={<ExpandMore />}>
         <Stack
-          direction="row"
+          direction={{ xs: "column", md: "row" }}
           justifyContent="space-between"
           alignItems="center"
           sx={{ width: "100%" }}
@@ -56,7 +56,11 @@ const CustomAccordion = ({ flight, index }) => {
               component="img"
               src={logo}
               alt={airlines}
-              sx={{ width: 32, height: 32 }}
+              sx={{
+                width: 32,
+                height: 32,
+                display: { xs: "none", md: "block" },
+              }}
             />
             <Stack>
               <Stack direction="row" spacing={1}>
@@ -71,7 +75,7 @@ const CustomAccordion = ({ flight, index }) => {
             </Stack>
           </Stack>
 
-          <Stack alignItems="center">
+          <Stack sx={{ alignItems: { xs: "baseline", md: "center" } }}>
             <Typography>{duration}</Typography>
             <Typography variant="body2" color="text.secondary">
               {searchParameters.originSkyId} –{" "}
@@ -108,9 +112,6 @@ const CustomAccordion = ({ flight, index }) => {
           </Stack>
         </Stack>
       </AccordionSummary>
-      {/* <AccordionDetails>
-        <p>HOLA</p>
-      </AccordionDetails> */}
       <CustomAccordionDetails flight={flight} />
     </Accordion>
   );

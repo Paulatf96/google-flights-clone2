@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Autocomplete, TextField, Box, InputAdornment } from "@mui/material";
+import { Autocomplete, TextField, Box, Grid } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 
 import flightSearchStore from "../../../store/flightSearchStore";
@@ -24,27 +24,29 @@ const CityFromTo = () => {
   };
 
   return (
-    <Box display="flex" alignItems="center" gap={1}>
-      <Autocomplete
-        options={cities}
-        value={originCity}
-        onChange={(e, newValue) => handleChange("originCity", newValue)}
-        renderInput={(params) => (
-          <TextField {...params} placeholder={"Where From"} />
-        )}
-        sx={{ width: "45%" }}
-      />
-      <SwapHorizIcon fontSize="large" />
-      <Autocomplete
-        options={cities}
-        value={destinationCity}
-        onChange={(e, newValue) => handleChange("destinationCity", newValue)}
-        renderInput={(params) => (
-          <TextField {...params} placeholder="Where To" />
-        )}
-        sx={{ width: "45%" }}
-      />
-    </Box>
+    <Grid item xs={9} md={12} sx={{ ml: { xs: 2 } }}>
+      <Box gap={1} sx={{ mb: 2, display: "flex", alignItems: "center" }}>
+        <Autocomplete
+          options={cities}
+          value={originCity}
+          onChange={(e, newValue) => handleChange("originCity", newValue)}
+          renderInput={(params) => (
+            <TextField {...params} placeholder={"Where From"} />
+          )}
+          sx={{ width: "45%" }}
+        />
+        <SwapHorizIcon fontSize="large" />
+        <Autocomplete
+          options={cities}
+          value={destinationCity}
+          onChange={(e, newValue) => handleChange("destinationCity", newValue)}
+          renderInput={(params) => (
+            <TextField {...params} placeholder="Where To" />
+          )}
+          sx={{ width: "45%" }}
+        />
+      </Box>
+    </Grid>
   );
 };
 

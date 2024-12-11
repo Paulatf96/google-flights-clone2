@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import flightSearchStore from "../../../store/flightSearchStore";
 import { Grid, MenuItem, Select, FormControl } from "@mui/material";
-import { Form } from "react-router";
 
 const SelectTypeTrip = () => {
   const [valueTypeTrip, setValueTypeTrip] = useState();
@@ -15,7 +14,7 @@ const SelectTypeTrip = () => {
     updateSearchParameter("isRoundTrip", value);
   };
   return (
-    <Grid item xs={12} md={2}>
+    <Grid item xs={6} md={2}>
       <FormControl>
         <Select
           value={valueTypeTrip}

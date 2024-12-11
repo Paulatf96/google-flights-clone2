@@ -1,4 +1,4 @@
-import { Divider } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
@@ -51,13 +51,13 @@ const DateFromTo = () => {
   };
 
   return (
-    <>
+    <Grid item xs={9} md={12} sx={{ ml: { xs: 2 } }}>
       <div
         style={{
           display: "flex",
           position: "relative",
           alignItems: "center",
-          width: 400,
+          width: "100%",
           height: 54.5,
           border: "1px solid lightgray",
           borderRadius: "5px",
@@ -96,7 +96,7 @@ const DateFromTo = () => {
           onSelect={handleSelect}
         />
       </div>
-    </>
+    </Grid>
   );
 };
 
